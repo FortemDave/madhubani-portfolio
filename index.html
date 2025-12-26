@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madhubani Portfolio | Pratham's Collection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        :root {
+            --bg-main: #0a0a0a; 
+            --bg-red-img: url('images/red-themed/Gemini_Generated_Image_9zerbf9zerbf9zer.png');
+            --bg-black-img: url('images/black-themed/Gemini_Generated_Image_j5zzu9j5zzu9j5zz.png');
+            --bg-bookmark: url('images/products/bookmark-wallpaper.png');
+            --skew-angle: -20deg;
+            --rev-skew: 20deg;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-main);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* --- Dynamic Diagonal Hero --- */
+        #home {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #000;
+        }
+        /* Sticky Header Logic */
+        .sticky-header {
+            position: sticky;
+            top: 64px; /* Adjust based on your nav height */
+            z-index: 50;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Saree Collage Layout */
+        .saree-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr; /* Large front shot, smaller detail shots */
+            grid-template-rows: auto auto;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .saree-main-shot {
+            grid-row: span 2;
+            height: 80vh;
+        }
+
+        .saree-detail-shot {
+            height: calc(40vh - 7.5px);
+        }
+
+        .saree-card {
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .saree-card:hover {
+            transform: rotate(1deg) scale(1.02);
+        }
+
+        .saree-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Masonry Grid for Smaller Works */
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-auto-rows: 220px;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .masonry-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s ease, filter 0.4s ease;
+            cursor: zoom-in;
+        }
+
+        /* Subtle hover effect to keep it "low-key" */
+        .masonry-item:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        .masonry-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Hides edge flaws of the initial works */
+        }
+
+        /* Triptych Layout */
+        .triptych-container {
+            display: flex;
+            gap: 8px; /* Small gap to make them "almost connected" */
+            height: 60vh; /* Fixed height for all three */
+            width: 100%;
+        }
+
+        .triptych-piece {
+            height: 100%;
+            flex: 1 1 auto; /* Allows pieces to grow/shrink based on their image ratio */
+            background: #fff;
+            padding: 8px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            cursor: zoom-in;
+            overflow: hidden;
+        }
+
+        .triptych-piece img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover; /* Crops flaws while maintaining the 3:4 or thin ratio */
+        }
+
+        .diagonal-container {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            width: 140%; /* Extra width to cover skew gaps */
+            left: -20%;
+            transform: skewX(var(--skew-angle));
+        }
+
+        .slot {
+            flex: 1;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border-right: 4px solid #000; /* Black dividers like your image */
+            background: #111;
+        }
+
+        .slice-layer {
+            position: absolute;
+            inset: -10% -150%; /* Oversized to handle the reverse skew */
+            width: 400%;
+            height: 120%;
+            transform: skewX(var(--rev-skew));
+            background-size: cover;
+            background-position: center;
+            transition: transform 1.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 1s;
+        }
+
+        /* Slide-in animation for new slices */
+        .slide-enter {
+            transform: skewX(var(--rev-skew)) translateY(-100%);
+            opacity: 0;
+        }
+        .slide-active {
+            transform: skewX(var(--rev-skew)) translateY(0%);
+            opacity: 1;
+        }
+
+        /* Hero Text Over the Slices */
+        .hero-content {
+            z-index: 10;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(8px);
+            padding: 2rem 4rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        /* --- Glassmorphism & Standard Layout --- */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-section {
+            width: 85%;
+            margin: 100px auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 1.2s cubic-bezier(0.17, 0.55, 0.55, 1);
+        }
+        .feature-section.is-visible { opacity: 1; transform: translateX(0); }
+
+        .photo-frame {
+            flex: 1.5; height: 60vh; background: #fff; padding: 12px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.3); border-radius: 8px;
+            overflow: hidden; cursor: zoom-in;
+        }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        #zoom-modal {
+            display: none; position: fixed; inset: 0; z-index: 2000;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
+            justify-content: center; align-items: center; padding: 40px;
+        }
+        #modal-img { max-width: 90%; max-height: 90vh; border-radius: 5px; }
+
+        nav {
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="zoom-modal" onclick="closeZoom()">
+        <span class="absolute top-10 right-10 text-4xl cursor-pointer">&times;</span>
+        <img id="modal-img" src="">
+    </div>
+
+    <nav class="flex justify-between items-center p-6 px-12">
+        <div class="font-bold text-xl tracking-widest">MADHUBANI ART</div>
+        <div class="space-x-8 text-xs uppercase tracking-widest">
+            <a href="#home">Home</a>
+            <a href="#red">Red Series</a>
+            <a href="#black">Black Series</a>
+            <a href="#gifts">Gift Items</a>
+            <a href="#sarees">Sarees </a>
+            <a href="#antarang">अंतरंग कृतियाँ</a>
+            <a href="#about">About</a>
+        </div>
+    </nav>
+
+    <section id="home" data-bg="#0a0a0a">
+        <div class="diagonal-container" id="diagonal-box">
+            </div>
+        
+        <div class="hero-content">
+            <h1 class="text-7xl font-serif mb-4">Mithila Artistry</h1>
+            <p class="text-xl opacity-80 tracking-widest uppercase">By Ritu Dave</p>
+        </div>
+    </section>
+
+    <section id="red" class="py-20" data-bg="var(--bg-red-img)">
+        <div class="feature-section glass-container p-8">
+            <div class="photo-frame" onclick="openZoom('images/red-themed/Matsya-Raas.jpg')">
+                <img src="images/red-themed/Matsya-Raas.jpg">
+            </div>
+            <div class="flex-1 p-6">
+                <h2 class="text-5xl font-serif mb-4">Matsya Raas</h2>
+                <p class="opacity-70 leading-relaxed">Details on red pigments and line work. Click the painting to see the fine Madhubani strokes.</p>
+            </div>
+        </div>
+
+        <div class="feature-section glass-container p-8">
+        <div class="photo-frame" onclick="openZoom('images/red-themed/Yashoda-Krishna-Leela.jpg')">
+            <img src="images/red-themed/Yashoda-Krishna-Leela.jpg">
+        </div>
+        <div class="flex-1 p-6">
+            <h2 class="text-5xl font-serif mb-4">Yashoda Krishna</h2>
+            <p class="opacity-70 leading-relaxed">A detailed portrayal of maternal love in the Bharni style.</p>
+        </div>
+    </div>
+    </section>
+
+    <section id="black" class="py-10" data-bg="var(--bg-black-img)">
+        <div class="feature-section glass-container p-8 flex-col items-start">
+            <h2 class="text-5xl font-serif mb-8 ml-4">The Great Triptych</h2>
+            
+            <div class="triptych-container">
+                <div class="triptych-piece" onclick="openZoom('images/black-themed/20251224_194729.jpg')">
+                    <img src="images/black-themed/20251224_194729.jpg">
+                </div>
+                
+                <div class="triptych-piece" onclick="openZoom('images/black-themed/20251224_194413.jpg')">
+                    <img src="images/black-themed/20251224_194413.jpg">
+                </div>
+                
+                <div class="triptych-piece" onclick="openZoom('images/black-themed/20251224_195336.jpg')">
+                    <img src="images/black-themed/20251224_195336.jpg">
+                </div>
+            </div>
+
+            <div class="mt-8 p-4">
+                <p class="opacity-70 max-w-2xl">This three-piece collection represents a single continuous narrative. Though painted on separate papers, the lines flow from one to the next.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="sticky-header">
+        <h2 class="text-4xl font-serif tracking-widest uppercase">Gift Items</h2>
+    </div>
+
+    <section id="gifts" class="py-20 px-10" data-bg="var(--bg-bookmark)">
+        <div class="max-w-7xl mx-auto space-y-32">
+            <div class="feature-section glass-container p-8">
+                <div class="photo-frame" onclick="openZoom('images/products/bookmarks-all.jpg')">
+                    <img src="images/products/bookmark-options.png" alt="Madhubani Bookmarks">
+                </div>
+                <div class="flex-1 p-6">
+                    <h3 class="text-4xl font-serif mb-4">Hand-Painted Bookmarks</h3>
+                    <p class="text-lg opacity-80 italic mb-6">"A bridge between worlds, marked by a single stroke."</p>
+                    <p class="opacity-70 leading-relaxed mb-6">
+                        Our bookmarks are not just placeholders; they are miniature canvases. Each piece is hand-inked on 300 GSM handmade paper, bringing the ancient Mithila tradition into your daily reading ritual. A perfect companion for your favorite stories.
+                    </p>
+                    <button class="px-6 py-2 bg-white text-black font-bold rounded-full">Inquire for Batch Orders</button>
+                </div>
+            </div>
+
+            <div class="feature-section glass-container p-8 flex-row-reverse">
+                <div class="photo-frame">
+                    <div class="w-full h-full bg-gray-800 flex items-center justify-center text-gray-500 italic">
+                    <img src="images/products/mug.jpg" alt="Madhubani Bookmarks">
+                    </div>
+                </div>
+                <div class="flex-1 p-6">
+                    <h3 class="text-4xl font-serif mb-4">Madhubani Mugs</h3>
+                    <p class="opacity-70 leading-relaxed mb-6">
+                        Elevate your morning coffee with motifs of the Sun and Earth. High-quality ceramic prints of original hand-painted works. Durable, dishwasher-safe, and artfully unique.
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature-section glass-container p-8">
+                <div class="photo-frame">
+                    <div class="w-full h-full bg-gray-800 flex items-center justify-center text-gray-500 italic">
+                    <img src="images/products/wall-tiles.png" alt="Madhubani Bookmarks">
+                    </div>
+                </div>
+                <div class="flex-1 p-6">
+                    <h3 class="text-4xl font-serif mb-4">Artisan Wall Tiles</h3>
+                    <p class="opacity-70 leading-relaxed">
+                        Transform your living spaces with ceramic tiles featuring intricate Kachni and Bharni patterns. Available in individual accent pieces or modular sets for wall installations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="antarang" class="py-20 px-10" data-bg="#0a0a0a">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-12 border-l-4 border-gray-600 pl-6">
+                <h2 class="text-5xl font-serif mb-2">अंतरंग कृतियाँ</h2>
+                <p class="text-gray-400 italic">Early explorations and the first strokes of a lifelong journey.</p>
+            </div>
+
+            <div class="masonry-grid">
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-1.jpg')"><img src="images/initial/Madhubani-1.jpg"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-2.jpg')"><img src="images/initial/Madhubani-2.jpg"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-4.jpg')"><img src="images/initial/Madhubani-4.jpg"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-6.jpg')"><img src="images/initial/Madhubani-6.jpg"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-8.jpg')"><img src="images/initial/Madhubani-8.jpg"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-9.jpg')"><img src="images/initial/Madhubani-9.jpg"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-10.jpg')"><img src="images/initial/Madhubani-10.jpg"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-11.jpg')"><img src="images/initial/Madhubani-11.jpg"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-12.jpg')"><img src="images/initial/Madhubani-12.jpg"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-13.jpg')"><img src="images/initial/Madhubani-13.jpg"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sarees" class="py-20 px-10" data-bg="#050505">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-6xl font-serif mb-4">The Silk Narrative</h2>
+                <p class="text-gray-400 tracking-widest uppercase text-sm">Hand-Painted Madhubani Sarees</p>
+            </div>
+
+            <div class="mb-40">
+                <div class="saree-grid">
+                    <div class="saree-card saree-main-shot" onclick="openZoom('images/sarees/saree1-front.jpg')">
+                        <img src="images/sarees/saree1-front.jpg" alt="Saree Front View">
+                    </div>
+                    <div class="saree-card saree-detail-shot" onclick="openZoom('images/sarees/saree1-pallu.jpg')">
+                        <img src="images/sarees/saree1-pallu.jpg" alt="Saree Pallu Detail">
+                    </div>
+                    <div class="saree-card saree-detail-shot" onclick="openZoom('images/sarees/saree1-side.jpg')">
+                        <img src="images/sarees/saree1-side.jpg" alt="Saree Border Detail">
+                    </div>
+                </div>
+                <div class="mt-8 flex justify-between items-end border-b border-gray-800 pb-8">
+                    <div>
+                        <h3 class="text-3xl font-serif">Tussar Silk: The Eternal Raas</h3>
+                        <p class="text-gray-500">Pure Tussar Silk with hand-painted border and pallu.</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm opacity-50 mb-2">Exclusive Piece</p>
+                        <a href="#contact" class="text-orange-400 font-bold tracking-widest hover:text-orange-300">REQUEST PRICING →</a>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+    </section>
+
+    <script>
+        // --- 1. CONFIGURATION: List all your images here ---
+        const galleryImages = [
+            'images/red-themed/Matsya-Raas-Vertical.jpg',
+            'images/red-themed/Yashoda-Krishna-Leela.jpg',
+            'images/black-themed/20251224_194413.jpg',
+            'images/black-themed/20251224_194729.jpg',
+            'images/20251224_193216.jpg',
+            'images/20251224_195528.jpg',
+            'images/Wall Painting_page-0001.jpg',
+            'images/initial/Madhubani-1.jpg',
+            'images/initial/Madhubani-2.jpg',
+            'images/initial/Madhubani-4.jpg',
+            'images/initial/Madhubani-6.jpg',
+            'images/initial/Madhubani-8.jpg',
+            'images/initial/Madhubani-9.jpg',
+            'images/initial/Madhubani-10.jpg',
+            'images/initial/Madhubani-11.jpg',
+            'images/initial/Madhubani-12.jpg',
+            'images/initial/Madhubani-13.jpg'
+        ];
+
+        // --- 2. DIAGONAL SLICE ENGINE ---
+        const diagonalBox = document.getElementById('diagonal-box');
+        const slotCount = 6;
+        const slots = [];
+
+        // Initialize Slots
+        for(let i=0; i < slotCount; i++) {
+            const slot = document.createElement('div');
+            slot.className = 'slot';
+            diagonalBox.appendChild(slot);
+            slots.push(slot);
+            updateSlot(i); // Initial image
+        }
+
+        function updateSlot(index) {
+            const slot = slots[index];
+            const imgSrc = galleryImages[Math.floor(Math.random() * galleryImages.length)];
+            
+            // Create new layer
+            const newLayer = document.createElement('div');
+            newLayer.className = 'slice-layer slide-enter';
+            newLayer.style.backgroundImage = `url('${imgSrc}')`;
+            
+            // Randomize position slightly to show different parts of the painting
+            newLayer.style.backgroundPosition = `${Math.random()*100}% ${Math.random()*100}%`;
+
+            slot.appendChild(newLayer);
+
+            // Trigger animation
+            setTimeout(() => {
+                newLayer.classList.remove('slide-enter');
+                newLayer.classList.add('slide-active');
+            }, 50);
+
+            // Remove old layers
+            if(slot.children.length > 1) {
+                const oldLayer = slot.children[0];
+                oldLayer.style.opacity = '0';
+                setTimeout(() => oldLayer.remove(), 1500);
+            }
+        }
+
+        // Randomly update a slot every 2 seconds
+        setInterval(() => {
+            const randomSlotIndex = Math.floor(Math.random() * slotCount);
+            updateSlot(randomSlotIndex);
+        }, 2000);
+
+        // --- 3. MODAL & OBSERVER LOGIC ---
+        function openZoom(src) {
+            document.getElementById('zoom-modal').style.display = 'flex';
+            document.getElementById('modal-img').src = src;
+        }
+        function closeZoom() {
+            document.getElementById('zoom-modal').style.display = 'none';
+        }
+
+        const sections = document.querySelectorAll('section');
+        const body = document.body;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bg = entry.target.getAttribute('data-bg');
+                    body.style.backgroundImage = bg.startsWith('var') ? bg : 'none';
+                    if (!bg.startsWith('var')) body.style.backgroundColor = bg;
+                    entry.target.querySelectorAll('.feature-section').forEach(f => f.classList.add('is-visible'));
+                }
+            });
+        }, { threshold: 0.3 });
+
+        sections.forEach(s => observer.observe(s));
+    </script>
+</body>
+</html>
