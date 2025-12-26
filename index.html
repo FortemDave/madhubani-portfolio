@@ -43,11 +43,13 @@
             background-color: var(--bg-main);
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
             background-attachment: fixed;
             transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: 'Segoe UI', sans-serif;
             color: white;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         /* --- Dynamic Diagonal Hero --- */
@@ -270,12 +272,13 @@
             /* Navigation - Hamburger Menu */
             nav {
                 padding: 1rem !important;
+                justify-content: space-between !important;
             }
             nav > div:first-child {
                 font-size: 0.875rem;
             }
-            nav > div:last-child {
-                display: none; /* Hide desktop menu */
+            nav > div:nth-child(2) {
+                display: none !important; /* Hide desktop menu completely */
             }
 
             /* Mobile Menu Toggle */
@@ -420,6 +423,24 @@
             /* Background attachment fixed causes issues on mobile */
             body {
                 background-attachment: scroll;
+                background-size: cover;
+                background-position: center center;
+            }
+
+            /* Gifts Section Spacing */
+            #gifts {
+                padding: 3rem 1rem !important;
+            }
+            #gifts .max-w-7xl {
+                max-width: 100%;
+            }
+            #gifts .space-y-32 {
+                gap: 3rem;
+            }
+
+            /* Fix flex-row-reverse on mobile */
+            .flex-row-reverse {
+                flex-direction: column !important;
             }
         }
 
