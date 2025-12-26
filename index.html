@@ -3,15 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore traditional Madhubani art by Ritu Dave. Hand-painted Mithila artwork featuring Bharni and Kachni styles, custom bookmarks, sarees, and home decor.">
+    <meta name="keywords" content="Madhubani art, Mithila painting, Indian folk art, Ritu Dave, hand-painted art, traditional art, Bharni style, Kachni style">
+    <meta name="author" content="Ritu Dave">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Madhubani Art Portfolio | Ritu Dave">
+    <meta property="og:description" content="Explore traditional Madhubani artwork featuring intricate Bharni and Kachni styles">
+    <meta property="og:image" content="images/red-themed/Matsya-Raas.webp">
+    <meta property="og:url" content="https://github.com/FortemDave/madhubani-portfolio">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Madhubani Art Portfolio | Ritu Dave">
+    <meta name="twitter:description" content="Explore traditional Madhubani artwork featuring intricate Bharni and Kachni styles">
+    <meta name="twitter:image" content="images/red-themed/Matsya-Raas.webp">
+    
     <title>Madhubani Portfolio | Pratham's Collection</title>
+    
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="images/red-themed/Gemini_Generated_Image_9zerbf9zerbf9zer.webp">
+    <link rel="preload" as="image" href="images/red-themed/Matsya-Raas.webp">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html { scroll-behavior: smooth; }
         :root {
             --bg-main: #0a0a0a; 
-            --bg-red-img: url('images/red-themed/Gemini_Generated_Image_9zerbf9zerbf9zer.png');
-            --bg-black-img: url('images/black-themed/Gemini_Generated_Image_j5zzu9j5zzu9j5zz.png');
-            --bg-bookmark: url('images/products/bookmark-wallpaper.png');
+            --bg-red-img: url('images/red-themed/Gemini_Generated_Image_9zerbf9zerbf9zer.webp');
+            --bg-black-img: url('images/black-themed/Gemini_Generated_Image_j5zzu9j5zzu9j5zz.webp');
+            --bg-bookmark: url('images/products/bookmark-wallpaper.webp');
             --skew-angle: -20deg;
             --rev-skew: 20deg;
         }
@@ -264,8 +286,8 @@
 
     <section id="red" class="py-20" data-bg="var(--bg-red-img)">
         <div class="feature-section glass-container p-8">
-            <div class="photo-frame" onclick="openZoom('images/red-themed/Matsya-Raas.jpg')">
-                <img src="images/red-themed/Matsya-Raas.jpg">
+            <div class="photo-frame" onclick="openZoom('images/red-themed/Matsya-Raas.webp')">
+                <img src="images/red-themed/Matsya-Raas.webp" alt="Matsya Raas - Red Madhubani painting depicting cosmic fish dance">
             </div>
             <div class="flex-1 p-6">
                 <h2 class="text-5xl font-serif mb-4">Matsya Raas</h2>
@@ -275,7 +297,7 @@
 
         <div class="feature-section glass-container p-8">
         <div class="photo-frame" onclick="openZoom('images/red-themed/Yashoda-Krishna-Leela.jpg')">
-            <img src="images/red-themed/Yashoda-Krishna-Leela.jpg">
+            <img src="images/red-themed/Yashoda-Krishna-Leela.jpg" loading="lazy" alt="Yashoda Krishna - Bharni style maternal love painting">
         </div>
         <div class="flex-1 p-6">
             <h2 class="text-5xl font-serif mb-4">Yashoda Krishna</h2>
@@ -289,16 +311,16 @@
             <h2 class="text-5xl font-serif mb-8 ml-4">The Great Triptych</h2>
             
             <div class="triptych-container">
-                <div class="triptych-piece" onclick="openZoom('images/black-themed/20251224_194729.jpg')">
-                    <img src="images/black-themed/20251224_194729.jpg">
+                <div class="triptych-piece" onclick="openZoom('images/black-themed/20251224_194729.webp')">
+                    <img src="images/black-themed/20251224_194729.webp" loading="lazy" alt="Triptych Part 1 - Kachni style monochrome work">
                 </div>
                 
-                <div class="triptych-piece" onclick="openZoom('images/black-themed/20251224_194413.jpg')">
-                    <img src="images/black-themed/20251224_194413.jpg">
+                <div class="triptych-piece" onclick="openZoom('images/black-themed/20251224_194413.webp')">
+                    <img src="images/black-themed/20251224_194413.webp" loading="lazy" alt="Triptych Part 2 - Kachni style monochrome work">
                 </div>
                 
-                <div class="triptych-piece" onclick="openZoom('images/black-themed/20251224_195336.jpg')">
-                    <img src="images/black-themed/20251224_195336.jpg">
+                <div class="triptych-piece" onclick="openZoom('images/black-themed/20251224_195336.webp')">
+                    <img src="images/black-themed/20251224_195336.webp" loading="lazy" alt="Triptych Part 3 - Kachni style monochrome work">
                 </div>
             </div>
 
@@ -315,8 +337,8 @@
     <section id="gifts" class="py-20 px-10" data-bg="var(--bg-bookmark)">
         <div class="max-w-7xl mx-auto space-y-32">
             <div class="feature-section glass-container p-8">
-                <div class="photo-frame" onclick="openZoom('images/products/bookmarks-all.jpg')">
-                    <img src="images/products/bookmark-options.png" alt="Madhubani Bookmarks">
+                <div class="photo-frame" onclick="openZoom('images/products/bookmark-options.webp')">
+                    <img src="images/products/bookmark-options.webp" loading="lazy" alt="Hand-painted Madhubani Bookmarks Collection">
                 </div>
                 <div class="flex-1 p-6">
                     <h3 class="text-4xl font-serif mb-4">Hand-Painted Bookmarks</h3>
@@ -331,7 +353,7 @@
             <div class="feature-section glass-container p-8 flex-row-reverse">
                 <div class="photo-frame">
                     <div class="w-full h-full bg-gray-800 flex items-center justify-center text-gray-500 italic">
-                    <img src="images/products/mug.jpg" alt="Madhubani Bookmarks">
+                    <img src="images/products/mug.webp" loading="lazy" alt="Madhubani Ceramic Mugs with Sun and Earth motifs">
                     </div>
                 </div>
                 <div class="flex-1 p-6">
@@ -345,7 +367,7 @@
             <div class="feature-section glass-container p-8">
                 <div class="photo-frame">
                     <div class="w-full h-full bg-gray-800 flex items-center justify-center text-gray-500 italic">
-                    <img src="images/products/wall-tiles.png" alt="Madhubani Bookmarks">
+                    <img src="images/products/wall-tiles.webp" loading="lazy" alt="Madhubani Artisan Wall Tiles - Kachni and Bharni patterns">
                     </div>
                 </div>
                 <div class="flex-1 p-6">
@@ -366,16 +388,16 @@
             </div>
 
             <div class="masonry-grid">
-                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-1.jpg')"><img src="images/initial/Madhubani-1.jpg"></div>
-                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-2.jpg')"><img src="images/initial/Madhubani-2.jpg"></div>
-                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-4.jpg')"><img src="images/initial/Madhubani-4.jpg"></div>
-                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-6.jpg')"><img src="images/initial/Madhubani-6.jpg"></div>
-                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-8.jpg')"><img src="images/initial/Madhubani-8.jpg"></div>
-                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-9.jpg')"><img src="images/initial/Madhubani-9.jpg"></div>
-                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-10.jpg')"><img src="images/initial/Madhubani-10.jpg"></div>
-                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-11.jpg')"><img src="images/initial/Madhubani-11.jpg"></div>
-                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-12.jpg')"><img src="images/initial/Madhubani-12.jpg"></div>
-                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-13.jpg')"><img src="images/initial/Madhubani-13.jpg"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-1.webp')"><img src="images/initial/Madhubani-1.webp" loading="lazy" alt="Early Madhubani Work"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-2.webp')"><img src="images/initial/Madhubani-2.webp" loading="lazy" alt="Early Madhubani Work"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-4.webp')"><img src="images/initial/Madhubani-4.webp" loading="lazy" alt="Early Madhubani Work"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-6.webp')"><img src="images/initial/Madhubani-6.webp" loading="lazy" alt="Early Madhubani Work"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-8.webp')"><img src="images/initial/Madhubani-8.webp" loading="lazy" alt="Early Madhubani Work"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-9.webp')"><img src="images/initial/Madhubani-9.webp" loading="lazy" alt="Early Madhubani Work"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-10.webp')"><img src="images/initial/Madhubani-10.webp" loading="lazy" alt="Early Madhubani Work"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-11.webp')"><img src="images/initial/Madhubani-11.webp" loading="lazy" alt="Early Madhubani Work"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-12.webp')"><img src="images/initial/Madhubani-12.webp" loading="lazy" alt="Early Madhubani Work"></div>
+                <div class="masonry-item" onclick="openZoom('images/initial/Madhubani-13.webp')"><img src="images/initial/Madhubani-13.webp" loading="lazy" alt="Early Madhubani Work"></div>
             </div>
         </div>
     </section>
@@ -417,23 +439,23 @@
     <script>
         // --- 1. CONFIGURATION: List all your images here ---
         const galleryImages = [
-            'images/red-themed/Matsya-Raas-Vertical.jpg',
+            'images/red-themed/Matsya-Raas-Vertical.webp',
             'images/red-themed/Yashoda-Krishna-Leela.jpg',
-            'images/black-themed/20251224_194413.jpg',
-            'images/black-themed/20251224_194729.jpg',
-            'images/20251224_193216.jpg',
-            'images/20251224_195528.jpg',
-            'images/Wall Painting_page-0001.jpg',
-            'images/initial/Madhubani-1.jpg',
-            'images/initial/Madhubani-2.jpg',
-            'images/initial/Madhubani-4.jpg',
-            'images/initial/Madhubani-6.jpg',
-            'images/initial/Madhubani-8.jpg',
-            'images/initial/Madhubani-9.jpg',
-            'images/initial/Madhubani-10.jpg',
-            'images/initial/Madhubani-11.jpg',
-            'images/initial/Madhubani-12.jpg',
-            'images/initial/Madhubani-13.jpg'
+            'images/black-themed/20251224_194413.webp',
+            'images/black-themed/20251224_194729.webp',
+            'images/20251224_193216.webp',
+            'images/20251224_195700.webp',
+            'images/Wall Painting_page-0001.webp',
+            'images/initial/Madhubani-1.webp',
+            'images/initial/Madhubani-2.webp',
+            'images/initial/Madhubani-4.webp',
+            'images/initial/Madhubani-6.webp',
+            'images/initial/Madhubani-8.webp',
+            'images/initial/Madhubani-9.webp',
+            'images/initial/Madhubani-10.webp',
+            'images/initial/Madhubani-11.webp',
+            'images/initial/Madhubani-12.webp',
+            'images/initial/Madhubani-13.webp'
         ];
 
         // --- 2. DIAGONAL SLICE ENGINE ---
