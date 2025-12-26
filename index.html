@@ -252,6 +252,197 @@
             background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px);
             position: fixed; top: 0; width: 100%; z-index: 1000;
         }
+
+        /* ====== MOBILE RESPONSIVE STYLES ====== */
+        @media (max-width: 768px) {
+            /* Hero Section */
+            .hero-content {
+                padding: 1.5rem 2rem;
+                margin: 0 1rem;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem !important;
+            }
+            .hero-content p {
+                font-size: 0.875rem !important;
+            }
+
+            /* Navigation - Hamburger Menu */
+            nav {
+                padding: 1rem !important;
+            }
+            nav > div:first-child {
+                font-size: 0.875rem;
+            }
+            nav > div:last-child {
+                display: none; /* Hide desktop menu */
+            }
+
+            /* Mobile Menu Toggle */
+            .mobile-menu-btn {
+                display: block !important;
+                cursor: pointer;
+                font-size: 1.5rem;
+            }
+            .mobile-menu {
+                display: none;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 2rem;
+                flex-direction: column;
+                gap: 1.5rem;
+                z-index: 999;
+            }
+            .mobile-menu.active {
+                display: flex;
+            }
+            .mobile-menu a {
+                font-size: 1rem;
+                text-align: center;
+                padding: 0.75rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            /* Feature Sections - Stack Vertically */
+            .feature-section {
+                flex-direction: column;
+                width: 95%;
+                margin: 50px auto;
+                gap: 20px;
+                padding: 1rem !important;
+            }
+            .feature-section.glass-container {
+                padding: 1.5rem !important;
+            }
+
+            /* Photo Frames */
+            .photo-frame {
+                width: 100%;
+                height: 50vh;
+                flex: none;
+            }
+
+            /* Text Content */
+            .feature-section h2,
+            .feature-section h3 {
+                font-size: 2rem !important;
+            }
+            .feature-section p {
+                font-size: 0.875rem;
+            }
+
+            /* Sticky Header */
+            .sticky-header {
+                top: 60px;
+                padding: 1rem 0;
+            }
+            .sticky-header h2 {
+                font-size: 1.75rem !important;
+            }
+
+            /* Triptych - Keep Horizontal on Mobile */
+            .triptych-container {
+                flex-direction: row;
+                height: 40vh; /* Reduce height for mobile */
+                gap: 4px;
+                overflow-x: auto; /* Allow horizontal scroll if needed */
+            }
+            .triptych-piece {
+                height: 100%;
+                min-width: 30%; /* Ensure each piece is visible */
+                flex-shrink: 0;
+            }
+
+            /* Masonry Grid - Smaller */
+            .masonry-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                grid-auto-rows: 180px;
+                gap: 10px;
+            }
+
+            /* Saree Grid - Stack */
+            .saree-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 15px;
+            }
+            .saree-main-shot {
+                grid-row: span 1;
+                height: 60vh;
+            }
+            .saree-detail-shot {
+                height: 40vh;
+            }
+
+            /* Diagonal Hero - Keep Animation on Mobile */
+            .diagonal-container {
+                width: 140%;
+                left: -20%;
+                transform: skewX(var(--skew-angle));
+            }
+            .slot {
+                border-right: 2px solid #000;
+            }
+            .slice-layer {
+                transform: skewX(var(--rev-skew));
+                inset: -10% -150%;
+                width: 400%;
+                height: 120%;
+            }
+            .slide-enter {
+                transform: skewX(var(--rev-skew)) translateY(-100%);
+            }
+            .slide-active {
+                transform: skewX(var(--rev-skew)) translateY(0%);
+            }
+
+            /* Zoom Modal */
+            #zoom-modal {
+                padding: 20px;
+            }
+            #modal-img {
+                max-width: 95%;
+                max-height: 85vh;
+            }
+
+            /* Section Headings */
+            section h2 {
+                font-size: 2.5rem !important;
+            }
+            section h3 {
+                font-size: 1.5rem !important;
+            }
+
+            /* Background attachment fixed causes issues on mobile */
+            body {
+                background-attachment: scroll;
+            }
+        }
+
+        /* Tablet Adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .feature-section {
+                width: 90%;
+                gap: 30px;
+            }
+            .hero-content h1 {
+                font-size: 4rem !important;
+            }
+            .masonry-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+        }
+
+        /* Desktop Menu - Hide mobile elements */
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -268,6 +459,24 @@
             <a href="#red">Red Series</a>
             <a href="#black">Black Series</a>
             <a href="#gifts">Gift Items</a>
+            <a href="#sarees">Sarees </a>
+            <a href="#antarang">अंतरंग कृतियाँ</a>
+            <a href="#about">About</a>
+        </div>
+        <!-- Mobile Hamburger -->
+        <div class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#home" onclick="toggleMobileMenu()">Home</a>
+        <a href="#red" onclick="toggleMobileMenu()">Red Series</a>
+        <a href="#black" onclick="toggleMobileMenu()">Black Series</a>
+        <a href="#gifts" onclick="toggleMobileMenu()">Gift Items</a>
+        <a href="#sarees" onclick="toggleMobileMenu()">Sarees</a>
+        <a href="#antarang" onclick="toggleMobileMenu()">अंतरंग कृतियाँ</a>
+        <a href="#about" onclick="toggleMobileMenu()">About</a>
+    </div>
             <a href="#sarees">Sarees </a>
             <a href="#antarang">अंतरंग कृतियाँ</a>
             <a href="#about">About</a>
@@ -296,8 +505,8 @@
         </div>
 
         <div class="feature-section glass-container p-8">
-        <div class="photo-frame" onclick="openZoom('images/red-themed/Yashoda-Krishna-Leela.jpg')">
-            <img src="images/red-themed/Yashoda-Krishna-Leela.jpg" loading="lazy" alt="Yashoda Krishna - Bharni style maternal love painting">
+        <div class="photo-frame" onclick="openZoom('images/red-themed/Yashoda-Krishna-Leela.webp')">
+            <img src="images/red-themed/Yashoda-Krishna-Leela.webp" loading="lazy" alt="Yashoda Krishna - Bharni style maternal love painting">
         </div>
         <div class="flex-1 p-6">
             <h2 class="text-5xl font-serif mb-4">Yashoda Krishna</h2>
@@ -513,6 +722,12 @@
         }
         function closeZoom() {
             document.getElementById('zoom-modal').style.display = 'none';
+        }
+
+        // --- 4. MOBILE MENU TOGGLE ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
         }
 
         const sections = document.querySelectorAll('section');
